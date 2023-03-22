@@ -967,7 +967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e203730f1879e8447a4d3e23e989ba40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  averageBullet: {fileID: 8045752505418369981, guid: fcd749a0a09cc2c44a79fe92e435055b, type: 3}
+  averageBullet: {fileID: 2183571722757410986, guid: fcd749a0a09cc2c44a79fe92e435055b, type: 3}
 --- !u!1 &2113179872
 GameObject:
   m_ObjectHideFlags: 0

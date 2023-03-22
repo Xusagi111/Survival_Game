@@ -34,14 +34,18 @@ namespace Assets.Script
                     _playerInventory.AddInventoryObj(CollisObj);
                     if (CollisObj.thisObj.TryGetComponent<BaseWeapon>(out BaseWeapon weapon))
                     {
+                        weapon.DisableComponent();
                         _playerInventory.ActiveWeapon = weapon;
-                        weapon.isActiveWeapon = true;
-                        weapon.gameObject.transform.SetParent(_playerInventory.ParentToWeapon);
-                        weapon.transform.position = Vector3.zero; //TODO изменить позицию
-                        Destroy(weapon.rg);
+                        Invoke("ResetPos", 1f);
+                    
                     }
                 }
             }
+        }
+
+        private void ResetPos()
+        {
+            _playerInventory.ResetToVector3Pos();
         }
     }
 }

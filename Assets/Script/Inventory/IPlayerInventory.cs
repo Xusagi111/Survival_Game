@@ -11,5 +11,6 @@ namespace Assets.Script.Inventory
         public Transform ParentToWeapon { get; set; }
         public void AddInventoryObj(IInventoryObject AddObj) { }
         public void RemoveInventoryObj(IInventoryObject RemoveObj) { }
+        public void ResetToVector3Pos();
     }
 }

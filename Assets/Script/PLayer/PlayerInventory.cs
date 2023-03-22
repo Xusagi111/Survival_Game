@@ -23,5 +23,16 @@ namespace Assets.Script
         {
             AllPlayerInventory.Remove(RemoveObj);
         }
+
+        [ContextMenu("Reset")]
+        public void ResetToVector3Pos()
+        {
+            ActiveWeapon.isActiveWeapon = true;
+            ActiveWeapon.gameObject.transform.parent = ParentToWeapon;
+            ActiveWeapon.transform.position = Vector3.zero;
+            ActiveWeapon.transform.localPosition = Vector3.zero;
+            ActiveWeapon.transform.localEulerAngles = Vector3.zero;
+            ActiveWeapon.gameObject.SetActive(true);
+        }
     }
 }

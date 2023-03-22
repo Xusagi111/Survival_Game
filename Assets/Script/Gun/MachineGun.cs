@@ -26,8 +26,9 @@ namespace Assets.Script.Gun
 
         private void SpawnProjectile()
         {
-          var Bullet = Instantiate(AllData.instance.averageBullet, PointToSpawnBullet.position, Quaternion.identity);
-            Bullet.Move(PointToSpawnBullet.position);
+            var Bullet = Instantiate(AllData.instance.averageBullet, PointToSpawnBullet.transform.position, Quaternion.identity);
+            Bullet.transform.eulerAngles = PointToSpawnBullet.eulerAngles;
+            Bullet.Move(PointToSpawnBullet.forward);
         }
 
         //Сделать перезарядку не мгновенно

@@ -10,7 +10,7 @@ namespace Assets.Script.Bullet
 
         public void Move(Vector3 VelosityPos)
         {
-            rg.velocity = VelosityPos * 10;
+            rg.velocity = VelosityPos * 30;
             //Генерировать проджектайл, для красоты.
         }
 
