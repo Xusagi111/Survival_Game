@@ -11,6 +11,8 @@ namespace Assets.Script.Player.Move
         private StateMovment _stateMovment;
         private Animator _playerAnimator;
 
+        private Vector3 _calculateInputPlayer;
+
         public bool IsJoustick
         {
             get { return _isJoystickMove; }
@@ -31,7 +33,12 @@ namespace Assets.Script.Player.Move
 
         private void Update() => GetInput();
 
-        private void FixedUpdate() => Move();
+        private void FixedUpdate()
+        {
+            CalculatePlayerInput();
+            Move();
+        }
+
 
         public override void GetInput()
         {
@@ -44,10 +51,8 @@ namespace Assets.Script.Player.Move
         {
             if (Horizontal != 0 || Vertical != 0)
             {
-                Vector3 movementDirection = new Vector3(Horizontal, 0, Vertical);
-                movementDirection.Normalize();
-                _rigidbody.velocity = movementDirection * SpeedMove * Time.fixedDeltaTime;
-                Rotate(ref movementDirection);
+                _rigidbody.velocity = _calculateInputPlayer * SpeedMove * Time.fixedDeltaTime;
+                Rotate(ref _calculateInputPlayer);
                 _playerAnimator.SetBool("isMove", true);
             }
             else
@@ -55,6 +60,12 @@ namespace Assets.Script.Player.Move
                 _playerAnimator.SetBool("isMove", false);
                 _rigidbody.velocity = Vector3.zero;
             }
+        }
+
+        private void CalculatePlayerInput()
+        {
+            _calculateInputPlayer = new Vector3(Horizontal, 0, Vertical);
+            _calculateInputPlayer.Normalize();
         }
 
         private void Rotate(ref Vector3 movementDirection)
@@ -71,5 +82,6 @@ namespace Assets.Script.Player.Move
             if (_isJoystickMove == true) _stateMovment.SetMoveJoustick();
             else if (_isJoystickMove == false) _stateMovment.SetMoveKeyBoard();
         }
+
     }
 }

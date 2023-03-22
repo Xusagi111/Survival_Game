@@ -1,6 +1,6 @@
 ﻿namespace Assets.Script.Player.Move
 {
-    //Make a joystick injection
+    //TODO ZEING
     class MovePlayerJoystick : IGetInputPlayer
     {
         private Joystick _joystick;
