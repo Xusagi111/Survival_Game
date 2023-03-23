@@ -1,40 +1,40 @@
 ﻿using Assets.Script.Bullet;
+using Assets.Script.Pool;
 using UnityEngine;
 using Zenject;
 
 namespace Assets.Script.Gun
 {
-    public class MachineGun : ShootingWeapon
+    public class AutomaticWeapons : ShootingWeapon
     {
         [SerializeField] private Transform PointToSpawnBullet;
         public const int CountMaxBullet = 30; //Состояние магазина
         public int CurrentCountBullet = 10;
         private AverageBullet _prefabCreateAverageBullet;
+        private IPool<BaseBullet> _poolBullet;
 
         [Inject]
-        public void Construct(AverageBullet averageBullet)
+        public void Construct(AverageBullet averageBullet, IPool<BaseBullet> pool)
         {
             _prefabCreateAverageBullet = averageBullet;
+            _poolBullet = pool;
         }
 
         public override void Attack()
         {
-            if (CurrentCountBullet > 1)
-            {
-                CurrentCountBullet--;
-                SpawnProjectile();
-            }
-            else
-            {
-                Recharge();
-            }
+            if (CurrentCountBullet > 1) Shooting();
+            else Recharge();
         }
 
-        private void SpawnProjectile()
+        private void Shooting()
         {
-            var Bullet = Instantiate(_prefabCreateAverageBullet, PointToSpawnBullet.transform.position, Quaternion.identity);
+            CurrentCountBullet--;
+            var Bullet = _poolBullet.UnitComponent;
+            _poolBullet.ActivatedComponent(PointToSpawnBullet.transform, Bullet);
             Bullet.transform.eulerAngles = PointToSpawnBullet.eulerAngles;
             Bullet.Move(PointToSpawnBullet.forward);
+            Bullet.Construct(_poolBullet);
+
         }
 
         //Сделать перезарядку не мгновенно

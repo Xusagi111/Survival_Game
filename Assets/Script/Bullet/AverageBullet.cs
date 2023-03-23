@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using Assets.Script.Pool;
 using UnityEngine;
 
 namespace Assets.Script.Bullet
@@ -7,6 +7,7 @@ namespace Assets.Script.Bullet
     {
         public override void Move(Vector3 VelosityPos, float CountXMoveBullet = 30)
         {
+            rg.useGravity = true;
             rg.velocity = VelosityPos * CountXMoveBullet;
             Invoke("RemovalEndTime", RemovalTime);
             //Генерировать проджектайл, для красоты.
@@ -24,7 +25,9 @@ namespace Assets.Script.Bullet
 
         protected override void RemovalEndTime()
         {
-            Destroy(this.gameObject);
+            rg.useGravity = false;
+            rg.velocity = Vector3.zero;
+            _pool.UnitComponent = this;
         }
-    }
+        }
 }
