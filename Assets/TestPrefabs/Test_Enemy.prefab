@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: 8103534535879891364}
   - component: {fileID: 6445686502824492686}
   - component: {fileID: 6295518876610772764}
+  - component: {fileID: 9159180316520577257}
   m_Layer: 8
   m_Name: Test_Enemy
   m_TagString: Player
@@ -527,7 +528,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6ecd6e78acb4b45b6e08b79ad31aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyView: {fileID: 9159180316520577257}
   _healthUnit: {fileID: 8103534535879891364}
+  _speedRotate: 20
 --- !u!114 &6295518876610772764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,6 +545,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hpBar: {fileID: 5887561026409648202}
   _healf: {fileID: 8103534535879891364}
+--- !u!114 &9159180316520577257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335947058559245858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68affe3e34c082049a4e664134a81c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 2282330982175815398}
 --- !u!1 &335947058640397053
 GameObject:
   m_ObjectHideFlags: 0
@@ -19252,11 +19268,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5432424965691225506, guid: bbe914b71c876c045968eb7bee2200d4, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8155924997779588598, guid: bbe914b71c876c045968eb7bee2200d4, type: 3}
       propertyPath: rg
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8155924997779588598, guid: bbe914b71c876c045968eb7bee2200d4, type: 3}
+      propertyPath: isActiveWeapon
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8155924997779588600, guid: bbe914b71c876c045968eb7bee2200d4, type: 3}
       propertyPath: m_Name
@@ -19309,6 +19329,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4215219157205483475, guid: bbe914b71c876c045968eb7bee2200d4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bbe914b71c876c045968eb7bee2200d4, type: 3}
+--- !u!114 &2282330982175815398 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8155924997779588598, guid: bbe914b71c876c045968eb7bee2200d4, type: 3}
+  m_PrefabInstance: {fileID: 7963452096388576016}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6c754c25972a541b6c2804bc12bf30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2282330982175815401 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8155924997779588601, guid: bbe914b71c876c045968eb7bee2200d4, type: 3}

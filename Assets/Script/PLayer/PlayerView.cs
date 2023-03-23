@@ -16,6 +16,8 @@ namespace Assets.Script.PLayer
 
         public IDamage Damage => _healthUnit;
 
+        public Transform ThisTransform { get => this.transform; }
+
         [Inject]
         private void Constructor(PlayerInventory playerInventory, PlayerTriggerCollision playerInput, HealthUnit healthUnit)
         {

@@ -2,7 +2,7 @@
 
 namespace Assets.Script.Player.Move
 {
-    public abstract class Movment: MonoBehaviour
+    public abstract class BaseMovment: MonoBehaviour
     {
         [SerializeField] protected float SpeedMove = 220;
         [SerializeField] protected float SpeedRotate = 600;

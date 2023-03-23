@@ -2,7 +2,7 @@
 
 namespace Assets.Script.Player.Move
 {
-    public class PlayerMove : Movment
+    public class PlayerMove : BaseMovment
     {
         [SerializeField] private Joystick _joystick;
         [SerializeField] private bool _isJoystickMove;
