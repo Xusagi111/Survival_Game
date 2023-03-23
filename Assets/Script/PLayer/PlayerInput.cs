@@ -1,49 +1,73 @@
 ﻿using Assets.Script.Gun;
 using Assets.Script.Inventory;
+using Assets.Script.PLayer;
+using Assets.Script.UI;
+using System;
 using UnityEngine;
 
 namespace Assets.Script
 {
-    //Обработка инпута игрока
-    //Возможно сделать что-то подобное для противника - ии.
     public class PlayerInput : MonoBehaviour
     {
         private IPlayerInventory _playerInventory;
-        
+        [SerializeField]  private ControllerTakingAnObjectFromScene _controllerTakingAnObjectFromScene;
+        private event Action _eventplayerCollision; //костыль
+
+        private void Awake()
+        {
+            _eventplayerCollision += ResetPos;
+        }
+
+        private void OnDestroy()
+        {
+            _eventplayerCollision -= ResetPos;
+        }
+
         public void AddInventoryPlayer(IPlayerInventory PlayerInventory)
         {
             _playerInventory = PlayerInventory;
         }
 
-        private void Update()
+        public void AttackEvent()
         {
-            if (Input.GetMouseButtonDown(0) && _playerInventory?.ActiveWeapon.isActiveWeapon == true)
+            if (_playerInventory.ActiveWeapon?.isActiveWeapon == true)
             {
-                _playerInventory?.ActiveWeapon.Attack();
+                _playerInventory.ActiveWeapon.Attack();
             }
         }
 
-        //Реализовать пока подбор оружия с помощью коллизии,
-        //A в дальнейшем сделать с помощью подбора оружия
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<IInventoryObject>(out IInventoryObject CollisObj))
+            if (_playerInventory != null && other.TryGetComponent<IInventoryObject>(out IInventoryObject CollisObj))
             {
-                if (CollisObj.isAffiliation == false && _playerInventory != null)
+                if (CollisObj.isAffiliation == false &&
+                    CollisObj.thisObj.TryGetComponent<BaseWeapon>(out BaseWeapon weapon))
                 {
-                    _playerInventory.AddInventoryObj(CollisObj);
-                    if (CollisObj.thisObj.TryGetComponent<BaseWeapon>(out BaseWeapon weapon))
-                    {
-                        weapon.DisableComponent();
-                        _playerInventory.ActiveWeapon = weapon;
-                        Invoke("ResetPos", 1f);
-                    
-                    }
+                    var PlayerCollizion = new PlayerCollisiоn(CollisObj, weapon, _playerInventory, _eventplayerCollision);
+                    _controllerTakingAnObjectFromScene.SetActiveEvent(true, PlayerCollizion);
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (_playerInventory != null && other.TryGetComponent<IInventoryObject>(out IInventoryObject CollisObj))
+            {
+                if (CollisObj.isAffiliation == false &&
+                    CollisObj.thisObj.TryGetComponent<BaseWeapon>(out BaseWeapon weapon))
+                {
+                    var PlayerCollizion = new PlayerCollisiоn(CollisObj, weapon, _playerInventory, _eventplayerCollision);
+                    _controllerTakingAnObjectFromScene.SetActiveEvent(false, PlayerCollizion);
                 }
             }
         }
 
         private void ResetPos()
+        {
+            Invoke("InvokeResPos", 1f);
+        }
+
+        private void InvokeResPos()
         {
             _playerInventory.ResetToVector3Pos();
         }

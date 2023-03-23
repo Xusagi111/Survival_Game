@@ -3,12 +3,9 @@ using UnityEngine;
 
 namespace Assets.Script.Bullet
 {
-    public class AverageBullet : MonoBehaviour
+    public class AverageBullet : BaseBullet
     {
-        [SerializeField] private Rigidbody rg;
-        [SerializeField] private float DamageBullet;
-
-        public void Move(Vector3 VelosityPos)
+        public override void Move(Vector3 VelosityPos)
         {
             rg.velocity = VelosityPos * 30;
             //Генерировать проджектайл, для красоты.

@@ -9,10 +9,15 @@ namespace Assets.Script.Unit
 
         public void AddDamage(float Damage)
         {
+            
             if (Damage >= Health)
             {
                 _health = 0;
                 Debug.Log("Смерть сущности");
+            }
+            else
+            {
+                _health -= Damage;
             }
         }
     }

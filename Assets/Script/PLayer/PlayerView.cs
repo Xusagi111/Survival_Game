@@ -12,7 +12,7 @@ namespace Assets.Script.PLayer
 
         public IDamage Damage => _healthUnit;
 
-        private void Start()
+        private void Awake()
         {
             _playerInput.AddInventoryPlayer(_playerInventory);
         }
