@@ -13,6 +13,8 @@ namespace Assets.Script.Gun
         private AverageBullet _prefabCreateAverageBullet;
         private IPool<BaseBullet> _poolBullet;
 
+        private void Awake() => CurrentTypeObj = typeof(AutomaticWeapons);
+
         [Inject]
         public void Construct(AverageBullet averageBullet, IPool<BaseBullet> pool)
         {

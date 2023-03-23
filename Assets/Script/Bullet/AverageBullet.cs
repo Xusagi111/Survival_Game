@@ -5,6 +5,8 @@ namespace Assets.Script.Bullet
 {
     public class AverageBullet : BaseBullet
     {
+        private void Awake() =>  CurrentTypeObj = typeof(AverageBullet);
+
         public override void Move(Vector3 VelosityPos, float CountXMoveBullet = 30)
         {
             rg.useGravity = true;
@@ -29,5 +31,5 @@ namespace Assets.Script.Bullet
             rg.velocity = Vector3.zero;
             _pool.UnitComponent = this;
         }
-        }
+    }
 }

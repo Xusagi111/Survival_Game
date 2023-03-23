@@ -1,45 +1,41 @@
-﻿using Assets.Script.PLayer;
+﻿using Assets.Script.Inventory;
+using Assets.Script.PLayer;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Assets.Script.UI
 {
     public class ControllerTakingAnObjectFromScene : MonoBehaviour
     {
         [SerializeField] private Button TakeObjectB;
-        [SerializeField] private List<PlayerCollisiоn> list = new List<PlayerCollisiоn>();
+        [SerializeField] private IPlayerInventory _playerInventory; 
+        [SerializeField] private List<IInventoryObject> ListObjectContact = new List<IInventoryObject>();
 
-        public void SetActiveEvent(bool isState, PlayerCollisiоn playerCollisiоn)
+        [Inject]
+        private void Constructor(IPlayerInventory playerInventory)
         {
-            TakeObjectB.gameObject.SetActive(isState);
-            if (isState == true) AddEventButton(playerCollisiоn);
-            else RemoveEventButton(playerCollisiоn);
-
+            _playerInventory = playerInventory;
         }
 
-        private void AddEventButton(PlayerCollisiоn playerCollisiоn)
+        public void AddEventOpenSetButton(IInventoryObject ContactObj)
         {
-            list.Add(playerCollisiоn);
+            TakeObjectB.gameObject.SetActive(true);
+            ListObjectContact.Add(ContactObj);
             TakeObjectB.onClick.AddListener(() =>
             {
-                playerCollisiоn.Collision();
-                SetActiveEvent(false, playerCollisiоn);
+                _playerInventory.AddInventoryObj(ContactObj);
+                RemoveEventSetButton(ContactObj);
             });
         }
 
-        private void RemoveEventButton(PlayerCollisiоn playerCollisiоn)
+        public void RemoveEventSetButton(IInventoryObject ContactObj)
         {
-            for (int i = 0; i < list.Count; i++)
+            if (ListObjectContact.IndexOf(ContactObj) != -1)
             {
-                var Item = list[i];
-                if (Item == playerCollisiоn)
-                {
-                    TakeObjectB.onClick.RemoveListener(() => playerCollisiоn.Collision());
-                    Item.ResetModel();
-                    list.Remove(Item);
-                    break;
-                }
+                TakeObjectB.gameObject.SetActive(false);
+                ListObjectContact.Remove(ContactObj);
             }
         }
     }

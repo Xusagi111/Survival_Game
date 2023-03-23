@@ -9253,7 +9253,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8970554549956520327}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4743ffa626d957044a2affcbde0d35b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ed6593db039aab47844ceabb6adf16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8970554550035780180
@@ -19145,9 +19145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34e00075b2cbb5469696cf928917b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInventory: {fileID: 5109950589963138077}
-  _playerInput: {fileID: 6657387829134405640}
-  _healthUnit: {fileID: 621989870606276774}
+  <ParentToWeapon>k__BackingField: {fileID: 4383632077717786236}
 --- !u!114 &5109950589963138077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19160,7 +19158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5703e1f0d26a7434084dad586df90eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ParentToWeapon>k__BackingField: {fileID: 4383632077717786236}
 --- !u!114 &621989870606276774
 MonoBehaviour:
   m_ObjectHideFlags: 0

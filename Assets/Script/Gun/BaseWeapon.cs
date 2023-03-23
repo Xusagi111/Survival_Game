@@ -1,4 +1,5 @@
 ﻿using Assets.Script.Inventory;
+using System;
 using UnityEngine;
 
 namespace Assets.Script.Gun
@@ -10,6 +11,7 @@ namespace Assets.Script.Gun
         [SerializeField] private BoxCollider BoxCollider;
         public bool isAffiliation { get; set; }
         public GameObject thisObj { get => this.gameObject; }
+        public Type CurrentTypeObj { get; protected set; }
 
         public virtual void Attack() { }
 
@@ -19,5 +21,6 @@ namespace Assets.Script.Gun
             this.gameObject.SetActive(false);
             Destroy(rg);
         }
+
     }
 }

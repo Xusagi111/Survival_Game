@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Script.Inventory
 {
@@ -6,5 +7,6 @@ namespace Assets.Script.Inventory
     {
         public bool isAffiliation { get; set; }
         public GameObject thisObj { get; }
+        public Type CurrentTypeObj { get; }
     }
 }
