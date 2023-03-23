@@ -4,17 +4,17 @@ using Zenject;
 
 namespace Assets.Script.Gun
 {
-    public class MachineGun : BaseWeapon, IRecharge
+    public class MachineGun : ShootingWeapon
     {
-        public Transform PointToSpawnBullet;
-        public const int CountMaxBullet = 30;
+        [SerializeField] private Transform PointToSpawnBullet;
+        public const int CountMaxBullet = 30; //Состояние магазина
         public int CurrentCountBullet = 10;
-        private AverageBullet _averageBullet;
+        private AverageBullet _prefabCreateAverageBullet;
 
         [Inject]
         public void Construct(AverageBullet averageBullet)
         {
-            _averageBullet = averageBullet;
+            _prefabCreateAverageBullet = averageBullet;
         }
 
         public override void Attack()
@@ -32,13 +32,13 @@ namespace Assets.Script.Gun
 
         private void SpawnProjectile()
         {
-            var Bullet = Instantiate(_averageBullet, PointToSpawnBullet.transform.position, Quaternion.identity);
+            var Bullet = Instantiate(_prefabCreateAverageBullet, PointToSpawnBullet.transform.position, Quaternion.identity);
             Bullet.transform.eulerAngles = PointToSpawnBullet.eulerAngles;
             Bullet.Move(PointToSpawnBullet.forward);
         }
 
         //Сделать перезарядку не мгновенно
-        public void Recharge()
+        public override void Recharge()
         {
             CurrentCountBullet = CountMaxBullet;
         }
