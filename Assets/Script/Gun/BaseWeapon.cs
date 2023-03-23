@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Assets.Script.Gun
 {
-    //Скриптейбл обж
     public abstract class BaseWeapon : MonoBehaviour, IInventoryObject
     {
         public bool isActiveWeapon;

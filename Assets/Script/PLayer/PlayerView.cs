@@ -1,20 +1,25 @@
 ﻿using Assets.Script.Unit;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Script.PLayer
 {
-    //TODO ZEING
     public class PlayerView : MonoBehaviour, IUnit
     {
-        [SerializeField] private PlayerInventory _playerInventory;
-        [SerializeField] private PlayerInput _playerInput;
-        [SerializeField] private HealthUnit _healthUnit;
+        private PlayerInventory _playerInventory;
+        private PlayerInput _playerInput;
+        private HealthUnit _healthUnit;
 
         public IDamage Damage => _healthUnit;
 
-        private void Awake()
+        [Inject]
+        private void Constructor(PlayerInventory playerInventory, PlayerInput playerInput, HealthUnit healthUnit)
         {
-            _playerInput.AddInventoryPlayer(_playerInventory);
+            _playerInventory = playerInventory;
+            _playerInput = playerInput;
+            _healthUnit = healthUnit;
         }
+
+        //private void Awake() => _playerInput.AddInventoryPlayer(_playerInventory);
     }
 }

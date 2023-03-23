@@ -24,7 +24,6 @@ namespace Assets.Script
             AllPlayerInventory.Remove(RemoveObj);
         }
 
-        [ContextMenu("Reset")]
         public void ResetToVector3Pos()
         {
             ActiveWeapon.isActiveWeapon = true;

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Script.Bullet;
+using UnityEngine;
+using Zenject;
 
 namespace Assets.Script.Gun
 {
@@ -7,7 +9,13 @@ namespace Assets.Script.Gun
         public Transform PointToSpawnBullet;
         public const int CountMaxBullet = 30;
         public int CurrentCountBullet = 10;
+        private AverageBullet _averageBullet;
 
+        [Inject]
+        public void Construct(AverageBullet averageBullet)
+        {
+            _averageBullet = averageBullet;
+        }
 
         public override void Attack()
         {
@@ -20,13 +28,11 @@ namespace Assets.Script.Gun
             {
                 Recharge();
             }
-
         }
-        
 
         private void SpawnProjectile()
         {
-            var Bullet = Instantiate(AllData.instance.averageBullet, PointToSpawnBullet.transform.position, Quaternion.identity);
+            var Bullet = Instantiate(_averageBullet, PointToSpawnBullet.transform.position, Quaternion.identity);
             Bullet.transform.eulerAngles = PointToSpawnBullet.eulerAngles;
             Bullet.Move(PointToSpawnBullet.forward);
         }

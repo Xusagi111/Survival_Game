@@ -4,13 +4,14 @@ using Assets.Script.PLayer;
 using Assets.Script.UI;
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Script
 {
     public class PlayerInput : MonoBehaviour
     {
         private IPlayerInventory _playerInventory;
-        [SerializeField]  private ControllerTakingAnObjectFromScene _controllerTakingAnObjectFromScene;
+        private ControllerTakingAnObjectFromScene _takingUiController;
         private event Action _eventplayerCollision; //костыль
 
         private void Awake()
@@ -23,9 +24,11 @@ namespace Assets.Script
             _eventplayerCollision -= ResetPos;
         }
 
-        public void AddInventoryPlayer(IPlayerInventory PlayerInventory)
+        [Inject]
+        public void Constructor(IPlayerInventory PlayerInventory, ControllerTakingAnObjectFromScene TakingUiController)
         {
             _playerInventory = PlayerInventory;
+            _takingUiController = TakingUiController;
         }
 
         public void AttackEvent()
@@ -38,26 +41,28 @@ namespace Assets.Script
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_playerInventory != null && other.TryGetComponent<IInventoryObject>(out IInventoryObject CollisObj))
+            if (_playerInventory != null &&
+                _takingUiController != null && 
+                other.TryGetComponent<IInventoryObject>(out IInventoryObject CollisObj))
             {
                 if (CollisObj.isAffiliation == false &&
                     CollisObj.thisObj.TryGetComponent<BaseWeapon>(out BaseWeapon weapon))
                 {
                     var PlayerCollizion = new PlayerCollisiоn(CollisObj, weapon, _playerInventory, _eventplayerCollision);
-                    _controllerTakingAnObjectFromScene.SetActiveEvent(true, PlayerCollizion);
+                    _takingUiController.SetActiveEvent(true, PlayerCollizion);
                 }
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (_playerInventory != null && other.TryGetComponent<IInventoryObject>(out IInventoryObject CollisObj))
+            if (other.TryGetComponent<IInventoryObject>(out IInventoryObject CollisObj))
             {
                 if (CollisObj.isAffiliation == false &&
                     CollisObj.thisObj.TryGetComponent<BaseWeapon>(out BaseWeapon weapon))
                 {
                     var PlayerCollizion = new PlayerCollisiоn(CollisObj, weapon, _playerInventory, _eventplayerCollision);
-                    _controllerTakingAnObjectFromScene.SetActiveEvent(false, PlayerCollizion);
+                    _takingUiController.SetActiveEvent(false, PlayerCollizion);
                 }
             }
         }
