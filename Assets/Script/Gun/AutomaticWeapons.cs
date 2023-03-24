@@ -16,7 +16,7 @@ namespace Assets.Script.Gun
 
         private void Awake()
         {
-            CurrentTypeObj = typeof(AutomaticWeapons);
+            TypeObj = typeof(AutomaticWeapons);
             UsingBulletType = typeof(AverageBullet);
         }
         [Inject]

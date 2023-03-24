@@ -1,6 +1,4 @@
-﻿using Assets.Script.Gun;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 namespace Assets.Script.Inventory
 {

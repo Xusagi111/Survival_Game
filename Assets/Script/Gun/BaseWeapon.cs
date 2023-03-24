@@ -11,7 +11,7 @@ namespace Assets.Script.Gun
         [SerializeField] private BoxCollider BoxCollider;
         public bool isAffiliation { get; set; }
         public GameObject thisObj { get => this.gameObject; }
-        public Type CurrentTypeObj { get; protected set; }
+        public Type TypeObj { get; protected set; }
 
         public virtual void Attack() { }
 

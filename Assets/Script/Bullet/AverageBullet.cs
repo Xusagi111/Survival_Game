@@ -23,7 +23,7 @@ namespace Assets.Script.Bullet
 
         public override void InitTypeRes()
         {
-            CurrentTypeObj = typeof(AverageBullet);
+            TypeObj = typeof(AverageBullet);
         }
     }
 }

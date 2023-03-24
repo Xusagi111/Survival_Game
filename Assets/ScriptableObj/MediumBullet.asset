@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79341ebd3e175564983a73c4b98f9a39, type: 3}
   m_Name: MediumBullet
   m_EditorClassIdentifier: 
-  _damageBullet: 0
+  _damageBullet: 10
   _removalTime: 2.5

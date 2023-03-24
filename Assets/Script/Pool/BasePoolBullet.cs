@@ -18,7 +18,7 @@ namespace Assets.Script.Pool
             foreach (var item in PrefabsCreateExemplar)
             {
                 item.InitTypeRes();
-                CreateToRequiredResourceType(item.CurrentTypeObj);
+                CreateToRequiredResourceType(item.TypeObj);
             }
         }
 
@@ -33,7 +33,7 @@ namespace Assets.Script.Pool
             T ItemRes = null;
             for (int i = 0; i < ListUnitComponents.Count; i++)
             {
-                if (TypeGetRes == ListUnitComponents[i].CurrentTypeObj)
+                if (TypeGetRes == ListUnitComponents[i].TypeObj)
                 {
                     ItemRes = ListUnitComponents[i];
                     break;
@@ -68,7 +68,7 @@ namespace Assets.Script.Pool
             for (int i = 0; i < PrefabsCreateExemplar.Length; i++)
             {
                 T Item = PrefabsCreateExemplar[i];
-                if (Item.CurrentTypeObj == TypeExemplar)
+                if (Item.TypeObj == TypeExemplar)
                 {
                     return Item;
                 }

@@ -7,6 +7,6 @@ namespace Assets.Script.Inventory
     {
         public bool isAffiliation { get; set; }
         public GameObject thisObj { get; }
-        public Type CurrentTypeObj { get; }
+        public Type TypeObj { get; }
     }
 }

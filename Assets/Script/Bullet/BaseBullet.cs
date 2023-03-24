@@ -15,7 +15,7 @@ namespace Assets.Script.Bullet
         public bool isAffiliation { get; set; }
 
         public GameObject thisObj => this.gameObject;
-        public Type CurrentTypeObj { get; protected set; }
+        public Type TypeObj { get; protected set; }
         public Rigidbody Rg => _rg;
         public IPoolBullet<BaseBullet> LinkPool => _pool;
 

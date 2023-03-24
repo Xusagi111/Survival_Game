@@ -24,7 +24,7 @@ namespace Assets.Script.Bullet
 
         public override void InitTypeRes()
         {
-            CurrentTypeObj = typeof(HeavyBullet);
+            TypeObj = typeof(HeavyBullet);
         }
     }
 }
