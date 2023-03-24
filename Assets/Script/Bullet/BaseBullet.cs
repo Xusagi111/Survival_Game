@@ -7,20 +7,32 @@ namespace Assets.Script.Bullet
 {
     public abstract class BaseBullet : MonoBehaviour, IInventoryObject
     {
-        [SerializeField] protected Rigidbody rg;
-        [SerializeField] protected float DamageBullet;
-        [SerializeField] protected float RemovalTime = 2.5f;
-        protected IPool<BaseBullet> _pool;
-
+        [SerializeField] private BullletData _bulletData;
+        [SerializeField] private Rigidbody _rg;
+      
+        private IPoolBullet<BaseBullet> _pool;
+        protected BullletData BulletData => _bulletData;
         public bool isAffiliation { get; set; }
-        public GameObject thisObj => this.gameObject;
 
+        public GameObject thisObj => this.gameObject;
         public Type CurrentTypeObj { get; protected set; }
+        public Rigidbody Rg => _rg;
+        public IPoolBullet<BaseBullet> LinkPool => _pool;
 
         public abstract void Move(Vector3 VelosityPos, float CountXMoveBullet = 30);
         protected abstract void RemovalEndTime();
 
-        public void Construct(IPool<BaseBullet> pool) => _pool = pool;
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.TryGetComponent<IUnit>(out IUnit unit)) BulletHitUnit(unit);
+        }
 
+        public virtual  void BulletHitUnit(IUnit unit)
+        {
+            unit.Damage.AddDamage(BulletData.DamageBullet);
+            RemovalEndTime();
+        }
+
+        public void Construct(IPoolBullet<BaseBullet> pool) => _pool = pool;
     }
 }

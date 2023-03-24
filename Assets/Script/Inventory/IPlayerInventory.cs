@@ -4,10 +4,8 @@ using UnityEngine;
 
 namespace Assets.Script.Inventory
 {
-    public  interface IPlayerInventory
+    public  interface IPlayerInventory : IInteractionInventory<IInventoryObject>
     {
         public List<IInventoryObject> AllPlayerInventory { get;}
-        public void AddInventoryObj(IInventoryObject AddObj) { }
-        public void RemoveInventoryObj(IInventoryObject RemoveObj) { }
     }
 }

@@ -591,6 +591,10 @@ PrefabInstance:
       propertyPath: _joystick
       value: 
       objectReference: {fileID: 1903772936}
+    - target: {fileID: 8970554550144016184, guid: 880355d02a16c3f479180b171bb91557, type: 3}
+      propertyPath: _isJoystickMove
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8970554550144016185, guid: 880355d02a16c3f479180b171bb91557, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -798,11 +802,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1251752439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d381e340e3af5224b839451f9d7dd038, type: 3}
+  m_Script: {fileID: 11500000, guid: e5ded4a8b00964044af25f0e1a38c3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabObj: {fileID: 2183571722757410986, guid: fcd749a0a09cc2c44a79fe92e435055b, type: 3}
-  CountCreateBlocks: 10
+  PrefabsCreateExemplar:
+  - {fileID: 2183571722757410986, guid: fcd749a0a09cc2c44a79fe92e435055b, type: 3}
+  CountCreateIteration: 10
   isUiGameobject: 0
 --- !u!4 &1251752441
 Transform:
@@ -1165,6 +1170,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562344951}
   m_CullTransparentMesh: 1
+--- !u!1 &1859116800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1859116802}
+  - component: {fileID: 1859116801}
+  m_Layer: 0
+  m_Name: MagazineForCartridges
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1859116801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859116800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01bfdde3c4ed221428798ee9e0ebf897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listBaseBullet: []
+  _maxCount: 0
+--- !u!4 &1859116802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859116800}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.44181418, y: 0.9768301, z: 11.584569}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1903772935
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,12 +1,11 @@
 ﻿using Assets.Script.Pool;
-using System;
 using UnityEngine;
 
 namespace Assets.Script.Bullet
 {
-    public class AverageBullet : BaseBullet
+    public class HeavyBullet : BaseBullet
     {
-        private void Awake() =>  CurrentTypeObj = typeof(AverageBullet);
+        private void Awake() => CurrentTypeObj = typeof(HeavyBullet);
 
         public override void Move(Vector3 VelosityPos, float CountXMoveBullet = 30)
         {

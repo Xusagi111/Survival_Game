@@ -1,5 +1,6 @@
 ﻿using Assets.Script.Bullet;
 using Assets.Script.Pool;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -8,15 +9,16 @@ namespace Assets.Script.Gun
     public class AutomaticWeapons : ShootingWeapon
     {
         [SerializeField] private Transform PointToSpawnBullet;
+        [SerializeField] private Type UsingBulletType;
         public const int CountMaxBullet = 30; //Состояние магазина
         public int CurrentCountBullet = 10;
         private AverageBullet _prefabCreateAverageBullet;
-        private IPool<BaseBullet> _poolBullet;
+        private IPoolBullet<BaseBullet> _poolBullet;
 
         private void Awake() => CurrentTypeObj = typeof(AutomaticWeapons);
 
         [Inject]
-        public void Construct(AverageBullet averageBullet, IPool<BaseBullet> pool)
+        public void Construct(AverageBullet averageBullet, IPoolBullet<BaseBullet> pool)
         {
             _prefabCreateAverageBullet = averageBullet;
             _poolBullet = pool;
@@ -31,12 +33,10 @@ namespace Assets.Script.Gun
         private void Shooting()
         {
             CurrentCountBullet--;
-            var Bullet = _poolBullet.UnitComponent;
+            var Bullet = _poolBullet.GetResource(UsingBulletType);
             _poolBullet.ActivatedComponent(PointToSpawnBullet.transform, Bullet);
             Bullet.transform.eulerAngles = PointToSpawnBullet.eulerAngles;
             Bullet.Move(PointToSpawnBullet.forward);
-            Bullet.Construct(_poolBullet);
-
         }
 
         //Сделать перезарядку не мгновенно
