@@ -17,6 +17,7 @@ namespace Assets.Script.Pool
             ListUnitComponents = new List<T>(CountCreateIteration);
             foreach (var item in PrefabsCreateExemplar)
             {
+                item.InitTypeRes();
                 CreateToRequiredResourceType(item.CurrentTypeObj);
             }
         }
@@ -29,14 +30,18 @@ namespace Assets.Script.Pool
 
         public T GetResource(Type TypeGetRes)
         {
+            T ItemRes = null;
             for (int i = 0; i < ListUnitComponents.Count; i++)
             {
                 if (TypeGetRes == ListUnitComponents[i].CurrentTypeObj)
                 {
-                    return ListUnitComponents[i];
+                    ItemRes = ListUnitComponents[i];
+                    break;
                 }
             }
-            return CreateToRequiredResourceType(TypeGetRes);
+            if (ItemRes == null) ItemRes = CreateToRequiredResourceType(TypeGetRes);
+            ListUnitComponents.Remove(ItemRes);
+            return ItemRes;
         }
 
         public T ActivatedComponent(Transform position, T Unit)
@@ -81,6 +86,7 @@ namespace Assets.Script.Pool
 
                 CreateElement.gameObject.SetActive(false);
                 ListUnitComponents.Add(CreateElement);
+                CreateElement.Construct((IPoolBullet<BaseBullet>)(this));
 
                 if (CreateElement != null) CurrentReturnedRes = CreateElement;
             }

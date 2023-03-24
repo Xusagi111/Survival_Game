@@ -5,7 +5,7 @@ namespace Assets.Script.Bullet
 {
     public class HeavyBullet : BaseBullet
     {
-        private void Awake() => CurrentTypeObj = typeof(HeavyBullet);
+        private void Awake() => InitTypeRes();
 
         public override void Move(Vector3 VelosityPos, float CountXMoveBullet = 30)
         {
@@ -20,6 +20,11 @@ namespace Assets.Script.Bullet
             Rg.useGravity = false;
             Rg.velocity = Vector3.zero;
             LinkPool.AddResource(this);
+        }
+
+        public override void InitTypeRes()
+        {
+            CurrentTypeObj = typeof(HeavyBullet);
         }
     }
 }

@@ -12,15 +12,16 @@ namespace Assets.Script.Gun
         [SerializeField] private Type UsingBulletType;
         public const int CountMaxBullet = 30; //Состояние магазина
         public int CurrentCountBullet = 10;
-        private AverageBullet _prefabCreateAverageBullet;
         private IPoolBullet<BaseBullet> _poolBullet;
 
-        private void Awake() => CurrentTypeObj = typeof(AutomaticWeapons);
-
+        private void Awake()
+        {
+            CurrentTypeObj = typeof(AutomaticWeapons);
+            UsingBulletType = typeof(AverageBullet);
+        }
         [Inject]
         public void Construct(AverageBullet averageBullet, IPoolBullet<BaseBullet> pool)
         {
-            _prefabCreateAverageBullet = averageBullet;
             _poolBullet = pool;
         }
 

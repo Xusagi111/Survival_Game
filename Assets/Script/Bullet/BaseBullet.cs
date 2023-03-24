@@ -22,6 +22,8 @@ namespace Assets.Script.Bullet
         public abstract void Move(Vector3 VelosityPos, float CountXMoveBullet = 30);
         protected abstract void RemovalEndTime();
 
+        public abstract void InitTypeRes();
+
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.TryGetComponent<IUnit>(out IUnit unit)) BulletHitUnit(unit);
