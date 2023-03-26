@@ -10,11 +10,11 @@ namespace Assets.Script.UI
     public class ControllerTakingAnObjectFromScene : MonoBehaviour
     {
         [SerializeField] private Button TakeObjectB;
-        [SerializeField] private IPlayerInventory _playerInventory; 
+        [SerializeField] private IInventory _playerInventory; 
         [SerializeField] private List<IInventoryObject> ListObjectContact = new List<IInventoryObject>();
 
         [Inject]
-        private void Constructor(IPlayerInventory playerInventory)
+        private void Constructor(IInventory playerInventory)
         {
             _playerInventory = playerInventory;
         }

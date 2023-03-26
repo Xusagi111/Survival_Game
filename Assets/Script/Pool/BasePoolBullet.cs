@@ -26,6 +26,7 @@ namespace Assets.Script.Pool
         {
             DisableGetComponent(value);
             ListUnitComponents.Add(value);
+            value.isAffiliation = false;
         }
 
         public T GetResource(Type TypeGetRes)
@@ -41,6 +42,7 @@ namespace Assets.Script.Pool
             }
             if (ItemRes == null) ItemRes = CreateToRequiredResourceType(TypeGetRes);
             ListUnitComponents.Remove(ItemRes);
+            ItemRes.isAffiliation = true;
             return ItemRes;
         }
 
@@ -48,6 +50,7 @@ namespace Assets.Script.Pool
         {
             Unit.transform.position = position.position;
             Unit.gameObject.SetActive(true);
+
             return Unit;
         }
 

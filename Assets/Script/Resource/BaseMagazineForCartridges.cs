@@ -17,7 +17,7 @@ namespace Assets.Script.Resource
 
         public void AddInventoryObj(Type TypeObj, int AddCount)
         {
-            if (TypeMagazine == TypeObj) _currentCount++;
+            if (TypeMagazine == TypeObj) _currentCount += AddCount;
         }
 
         public bool RemoveInventoryObj(Type TypeObj, int RemoveCount)
@@ -29,11 +29,6 @@ namespace Assets.Script.Resource
             }
 
             return false;
-        }
-
-        protected void InitTypeObj()
-        {
-
         }
     }
 }

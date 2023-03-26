@@ -1,6 +1,9 @@
 ﻿using Assets.Script.Bullet;
+using Assets.Script.Inventory;
 using Assets.Script.Pool;
+using Assets.Script.Resource;
 using System;
+using System.Collections;
 using UnityEngine;
 using Zenject;
 
@@ -10,8 +13,9 @@ namespace Assets.Script.Gun
     {
         [SerializeField] private Transform PointToSpawnBullet;
         [SerializeField] private Type UsingBulletType;
-        public const int CountMaxBullet = 30; //Состояние магазина
-        public int CurrentCountBullet = 10;
+        [SerializeField] private CurrentTypeMagaze _currentTypeMagaze;
+        public const int CountMaxBullet = 30;
+        public int CurrentCountBullet = 0;
         private IPoolBullet<BaseBullet> _poolBullet;
 
         private void Awake()
@@ -25,10 +29,15 @@ namespace Assets.Script.Gun
             _poolBullet = pool;
         }
 
+        public override void UsingWeapon(IInventory UsingInventory)
+        {
+            CurrentInventory = UsingInventory;
+        }
+
         public override void Attack()
         {
             if (CurrentCountBullet > 1) Shooting();
-            else Recharge();
+            else StartRecharge();
         }
 
         private void Shooting()
@@ -39,11 +48,53 @@ namespace Assets.Script.Gun
             Bullet.transform.eulerAngles = PointToSpawnBullet.eulerAngles;
             Bullet.Move(PointToSpawnBullet.forward);
         }
-
-        //Сделать перезарядку не мгновенно
-        public override void Recharge()
+     
+        public override void StartRecharge()
         {
-            CurrentCountBullet = CountMaxBullet;
+            if (isRecharge == true) return;
+            if (CheckToRecharge()) StartCoroutine(СountdownToRecharge());
+        }
+
+        public override void GetMagazeToInventory()
+        {
+            CurrentInventory.SortAllMagazineRes(UsingBulletType);
+            if (CurrentInventory != null)
+            {
+                _currentTypeMagaze = (CurrentTypeMagaze)CurrentInventory.GetCurrentTypeInventory(UsingBulletType);
+            }
+        }
+
+        private IEnumerator СountdownToRecharge()
+        {
+            yield return new WaitForSeconds(TimeColdown);
+            EndRecharge();
+        }
+
+        public override void EndRecharge() 
+        {
+            GetMagazeToInventory();
+            if (_currentTypeMagaze != null)
+            {
+                int addBullet = 0;
+                int acceptableAddBullet = CountMaxBullet - CurrentCountBullet;
+
+                if (acceptableAddBullet > _currentTypeMagaze.CurrentCount) addBullet = _currentTypeMagaze.CurrentCount;
+                else addBullet = acceptableAddBullet;
+
+                _currentTypeMagaze.RemoveInventoryObj(UsingBulletType, addBullet);
+                CurrentCountBullet += addBullet;
+            }
+        }
+
+        public override bool CheckToRecharge()
+        {
+            CurrentInventory.SortAllMagazineRes(UsingBulletType);
+
+            var CurrentMagazine = (CurrentTypeMagaze)CurrentInventory.GetCurrentTypeInventory(UsingBulletType);
+
+            if (CurrentMagazine != null &&
+                CurrentMagazine.CurrentCount > 0) return true;
+            else return false;
         }
     }
 }

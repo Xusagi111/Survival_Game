@@ -48,6 +48,12 @@ namespace Assets.Script.PLayer
             ActiveWeapon.transform.localPosition = Vector3.zero;
             ActiveWeapon.transform.localEulerAngles = Vector3.zero;
             ActiveWeapon.gameObject.SetActive(true);
+
+
+            if (ActiveWeapon is ShootingWeapon shooting)
+            {
+                shooting.UsingWeapon(_playerInventory);
+            }
         }
     }
 }

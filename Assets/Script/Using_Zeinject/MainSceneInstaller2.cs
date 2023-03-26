@@ -23,7 +23,7 @@ namespace Assets.Script.Using_Zeinject
             Container.Bind<PlayerInventory>().FromInstance(_playerInventory).AsSingle();
             Container.Bind<PlayerTriggerCollision>().FromInstance(_playerInput).AsSingle();
             Container.Bind<HealthUnit>().FromInstance(_healthUnit).AsSingle();
-            Container.Bind<IPlayerInventory>().FromInstance(_playerInventory).AsSingle();
+            Container.Bind<Inventory.IInventory>().FromInstance(_playerInventory).AsSingle();
             Container.Bind<ControllerTakingAnObjectFromScene>().FromInstance(_takingUiController).AsSingle();
             Container.Bind<IPoolBullet<BaseBullet>>().FromInstance(_bulletPool).AsSingle();
             Container.Bind<PlayerView>().FromInstance(_playerView).AsSingle();

@@ -11,10 +11,10 @@ namespace Assets.Script.PLayer
         [SerializeField] private Image _hpBar;
         private HealthUnit _playerHealf;
         private PlayerView _playerView;
-        private IPlayerInventory _playerInventory;
+        private Inventory.IInventory _playerInventory;
 
         [Inject]
-        private void Constructor(IPlayerInventory playerInventory, PlayerView playerView, HealthUnit healthUnit)
+        private void Constructor(Inventory.IInventory playerInventory, PlayerView playerView, HealthUnit healthUnit)
         {
             _playerInventory = playerInventory;
             _playerView = playerView;
