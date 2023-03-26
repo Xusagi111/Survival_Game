@@ -111,4 +111,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentCount: 100
+  _uIDataResource: {fileID: 11400000, guid: 831b102a9ce935d47bc46475f0542644, type: 2}
   magazinTypeBulletEnum: 1

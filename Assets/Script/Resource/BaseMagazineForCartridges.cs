@@ -8,7 +8,9 @@ namespace Assets.Script.Resource
     {
         [SerializeField] private int _currentCount;
         protected Type TypeMagazine;
+        [SerializeField] private UIDataResource _uIDataResource;
 
+        public UIDataResource UIDataResource => _uIDataResource;
         public int CurrentCount { get => _currentCount; }
         public bool isAffiliation { get; set; }
 

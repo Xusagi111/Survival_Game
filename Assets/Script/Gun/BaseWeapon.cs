@@ -1,4 +1,5 @@
 ﻿using Assets.Script.Inventory;
+using Assets.Script.Resource;
 using System;
 using UnityEngine;
 
@@ -6,13 +7,16 @@ namespace Assets.Script.Gun
 {
     public abstract class BaseWeapon : MonoBehaviour, IInventoryObject
     {
-
         public bool isActiveWeapon;
         [SerializeField] private Rigidbody rg;
         [SerializeField] private BoxCollider BoxCollider;
         public bool isAffiliation { get; set; }
         public GameObject thisObj { get => this.gameObject; }
         public Type TypeObj { get; protected set; }
+
+        [SerializeField] private UIDataResource _uIDataResource;
+
+        public UIDataResource UIDataResource => _uIDataResource;
 
         public virtual void Attack() { }
 
