@@ -32,11 +32,13 @@ namespace Assets.Script.Gun
         public override void UsingWeapon(IInventory UsingInventory)
         {
             CurrentInventory = UsingInventory;
+            EndRecharge();
+
         }
 
         public override void Attack()
         {
-            if (CurrentCountBullet > 1) Shooting();
+            if (CurrentCountBullet >= 1) Shooting();
             else StartRecharge();
         }
 
@@ -47,6 +49,7 @@ namespace Assets.Script.Gun
             _poolBullet.ActivatedComponent(PointToSpawnBullet.transform, Bullet);
             Bullet.transform.eulerAngles = PointToSpawnBullet.eulerAngles;
             Bullet.Move(PointToSpawnBullet.forward);
+            UpdateUICartridges();
         }
      
         public override void StartRecharge()
@@ -68,6 +71,7 @@ namespace Assets.Script.Gun
         {
             yield return new WaitForSeconds(TimeColdown);
             EndRecharge();
+            UpdateUICartridges();
         }
 
         public override void EndRecharge() 
@@ -84,6 +88,7 @@ namespace Assets.Script.Gun
                 _currentTypeMagaze.RemoveInventoryObj(UsingBulletType, addBullet);
                 CurrentCountBullet += addBullet;
             }
+            UpdateUICartridges();
         }
 
         public override bool CheckToRecharge()
@@ -95,6 +100,11 @@ namespace Assets.Script.Gun
             if (CurrentMagazine != null &&
                 CurrentMagazine.CurrentCount > 0) return true;
             else return false;
+        }
+
+        public void UpdateUICartridges()
+        {
+            EventUpdateCartridges?.Invoke(CurrentCountBullet, CountMaxBullet);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Assets.Script.Using_Zeinject
         [SerializeField] private ControllerTakingAnObjectFromScene _takingUiController;
         [SerializeField] private BulletPool _bulletPool;
         [SerializeField] private PlayerView _playerView;
+        [SerializeField] private PlayerUI _playerUI;
 
         public override void InstallBindings()
         {
@@ -27,6 +28,7 @@ namespace Assets.Script.Using_Zeinject
             Container.Bind<ControllerTakingAnObjectFromScene>().FromInstance(_takingUiController).AsSingle();
             Container.Bind<IPoolBullet<BaseBullet>>().FromInstance(_bulletPool).AsSingle();
             Container.Bind<PlayerView>().FromInstance(_playerView).AsSingle();
+            Container.Bind<PlayerUI>().FromInstance(_playerUI).AsSingle();
         }
     }
 }

@@ -1,9 +1,13 @@
 ﻿using Assets.Script.Inventory;
+using System;
+using UnityEngine.Events;
 
 namespace Assets.Script.Gun
 {
     public abstract class ShootingWeapon : BaseWeapon
     {
+        public UnityEvent<int, int> EventUpdateCartridges;
+
         protected IInventory CurrentInventory;
         protected bool isRecharge;
         protected float TimeColdown = 1f;

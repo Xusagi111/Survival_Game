@@ -6,6 +6,7 @@ namespace Assets.Script.Gun
 {
     public abstract class BaseWeapon : MonoBehaviour, IInventoryObject
     {
+
         public bool isActiveWeapon;
         [SerializeField] private Rigidbody rg;
         [SerializeField] private BoxCollider BoxCollider;

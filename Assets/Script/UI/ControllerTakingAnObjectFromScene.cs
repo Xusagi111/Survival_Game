@@ -27,6 +27,7 @@ namespace Assets.Script.UI
             {
                 _playerInventory.AddInventoryObj(ContactObj);
                 RemoveEventSetButton(ContactObj);
+                ContactObj.thisObj.SetActive(false);    
             });
         }
 
