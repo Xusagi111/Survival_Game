@@ -544,7 +544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hpBar: {fileID: 5887561026409648202}
-  _healf: {fileID: 8103534535879891364}
+  _healthUnit: {fileID: 8103534535879891364}
 --- !u!114 &9159180316520577257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,6 +558,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 4479497851529565834}
+  _healthUnit: {fileID: 8103534535879891364}
+  _animatorUnit: {fileID: 335947058559245857}
 --- !u!1 &335947058640397053
 GameObject:
   m_ObjectHideFlags: 0
@@ -11150,7 +11152,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1978525331650543690}
-  - component: {fileID: 2089559396911330576}
   m_Layer: 0
   m_Name: MaleCharacterPBR
   m_TagString: Untagged
@@ -11178,26 +11179,6 @@ Transform:
   m_Father: {fileID: 335947058559245883}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2089559396911330576
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170640009642171120}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: 0308cf4e83cf517488b60af58b290fe0, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2be64f57d7d213648aa9b2e5e8e0a39b, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1186563198547485241
 GameObject:
   m_ObjectHideFlags: 0

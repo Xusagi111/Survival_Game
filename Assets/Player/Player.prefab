@@ -19150,6 +19150,7 @@ MonoBehaviour:
   EventUpdateCartridges:
     m_PersistentCalls:
       m_Calls: []
+  _animatorUnit: {fileID: 8970554550144016163}
   <ParentToWeapon>k__BackingField: {fileID: 4383632077717786236}
 --- !u!114 &5109950589963138077
 MonoBehaviour:

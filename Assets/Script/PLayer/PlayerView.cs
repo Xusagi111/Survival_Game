@@ -9,6 +9,7 @@ namespace Assets.Script.PLayer
     public class PlayerView : MonoBehaviour, IUnit
     {
         public  UnityEvent<int, int> EventUpdateCartridges;
+        [SerializeField] private Animator _animatorUnit; 
         private PlayerInventory _playerInventory;
         private PlayerTriggerCollision _playerInput;
         private PlayerUI _playerUI;
@@ -17,6 +18,7 @@ namespace Assets.Script.PLayer
         [field: SerializeField] public Transform ParentToWeapon { get; set; }
 
         public IDamage Damage => _healthUnit;
+        public IDeath Death => _healthUnit;
 
         public Transform ThisTransform { get => this.transform; }
 
@@ -27,8 +29,8 @@ namespace Assets.Script.PLayer
             _playerInput = playerInput;
             _healthUnit = healthUnit;
             _playerUI = playerUI;
+            AddEvent();
         }
-
 
         [ContextMenu("Invoke To Scene")]
         public void AttackEvent()
@@ -67,6 +69,14 @@ namespace Assets.Script.PLayer
             EventUpdateCartridges = shooting.EventUpdateCartridges;
             EventUpdateCartridges?.RemoveAllListeners();
             EventUpdateCartridges?.AddListener(UpdateCartridges);
+        }
+
+        private void AddEvent() => _healthUnit.EventIsDeath += DeadAnimation;
+        private void OnDestroy() => _healthUnit.EventIsDeath -= DeadAnimation;
+
+        private void DeadAnimation(bool isDead)
+        {
+            _animatorUnit.SetBool("isDeath", isDead);
         }
     }
 }

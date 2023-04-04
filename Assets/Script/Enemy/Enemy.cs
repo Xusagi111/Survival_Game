@@ -13,6 +13,7 @@ namespace Assets.Script.Enemy
         [SerializeField] private float _speedRotate;
 
         public IDamage Damage => _healthUnit;
+        public IDeath Death => _healthUnit;
 
         public Transform ThisTransform { get => this.transform;}
 

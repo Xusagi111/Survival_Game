@@ -7,5 +7,7 @@ namespace Assets.Script
     {
         public IDamage Damage {get;}
         public Transform ThisTransform { get;}
+
+        public IDeath Death { get; }
     }
 }

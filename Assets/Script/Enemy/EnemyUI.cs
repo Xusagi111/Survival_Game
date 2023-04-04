@@ -1,6 +1,4 @@
-﻿using Assets.Script.PLayer;
-using Assets.Script.Unit;
-using System.Collections;
+﻿using Assets.Script.Unit;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,21 +7,21 @@ namespace Assets.Script.Enemy
     public class EnemyUI : MonoBehaviour
     {
         [SerializeField] private Image _hpBar;
-        [SerializeField] private HealthUnit _healf;
+        [SerializeField] private HealthUnit _healthUnit;
 
         private void Awake()
         {
-            _healf.EventUpdateHealf += ChangesToHpBar;
+            _healthUnit.EventUpdateHealf += ChangesToHpBar;
         }
 
         private void OnDestroy()
         {
-            _healf.EventUpdateHealf -= ChangesToHpBar;
+            _healthUnit.EventUpdateHealf -= ChangesToHpBar;
         }
 
         public void ChangesToHpBar()
         {
-            _hpBar.fillAmount = _healf.Health / _healf.MaxHealth;
+            _hpBar.fillAmount = _healthUnit.Health / _healthUnit.MaxHealth;
         }
     }
 }
