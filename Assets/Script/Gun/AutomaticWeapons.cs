@@ -1,4 +1,5 @@
 ﻿using Assets.Script.Bullet;
+using Assets.Script.Gun;
 using Assets.Script.Inventory;
 using Assets.Script.Pool;
 using Assets.Script.Resource;
@@ -9,6 +10,7 @@ using Zenject;
 
 namespace Assets.Script.Gun
 {
+    //Обновление патронов для врага, так как сейчас реализованно обновление только для игрока.
     public class AutomaticWeapons : ShootingWeapon
     {
         [SerializeField] private Transform PointToSpawnBullet;
@@ -23,6 +25,7 @@ namespace Assets.Script.Gun
             TypeObj = typeof(AutomaticWeapons);
             UsingBulletType = typeof(AverageBullet);
         }
+
         [Inject]
         public void Construct(AverageBullet averageBullet, IPoolBullet<BaseBullet> pool)
         {
@@ -33,7 +36,6 @@ namespace Assets.Script.Gun
         {
             CurrentInventory = UsingInventory;
             EndRecharge();
-
         }
 
         public override void Attack()
@@ -42,7 +44,7 @@ namespace Assets.Script.Gun
             else StartRecharge();
         }
 
-        private void Shooting()
+        public override bool Shooting()
         {
             CurrentCountBullet--;
             var Bullet = _poolBullet.GetResource(UsingBulletType);
@@ -50,6 +52,7 @@ namespace Assets.Script.Gun
             Bullet.transform.eulerAngles = PointToSpawnBullet.eulerAngles;
             Bullet.Move(PointToSpawnBullet.forward);
             UpdateUICartridges();
+            return true;
         }
      
         public override void StartRecharge()
@@ -91,6 +94,7 @@ namespace Assets.Script.Gun
             UpdateUICartridges();
         }
 
+        //Мне нужен евент для врага
         public override bool CheckToRecharge()
         {
             CurrentInventory.SortAllMagazineRes(UsingBulletType);

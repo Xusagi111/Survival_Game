@@ -18,7 +18,7 @@ namespace Assets.Script.Gun
 
         public UIDataResource UIDataResource => _uIDataResource;
 
-        public virtual void Attack() { }
+        public virtual void Attack() { Debug.Log("Attack()"); }
 
         public void DisableComponent()
         {

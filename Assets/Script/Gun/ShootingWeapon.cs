@@ -12,13 +12,20 @@ namespace Assets.Script.Gun
         protected bool isRecharge;
         protected float TimeColdown = 1f;
 
-        public override void Attack() { }
-
         public abstract void StartRecharge();
         public abstract void EndRecharge();
         public abstract bool CheckToRecharge();
 
+        public abstract bool Shooting();
+
         public virtual void UsingWeapon(IInventory UsingInventory) { }
         public abstract void GetMagazeToInventory();
+
+        //Реализивать логику с магазнами в ShootingWeapon
+        //public override void Attack()
+        //{
+        //    if (CurrentCountBullet >= 1) Shooting();
+        //    else StartRecharge();
+        //}
     }
 }
