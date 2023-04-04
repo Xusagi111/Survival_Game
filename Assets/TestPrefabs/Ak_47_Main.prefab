@@ -134,7 +134,12 @@ MonoBehaviour:
   isActiveWeapon: 0
   rg: {fileID: 4215219157205483475}
   BoxCollider: {fileID: 5432424965691225506}
+  _uIDataResource: {fileID: 11400000, guid: 22dd73246fd32fe44b31132496058a7a, type: 2}
+  EventUpdateCartridges:
+    m_PersistentCalls:
+      m_Calls: []
   PointToSpawnBullet: {fileID: 8155924998414555432}
+  _currentTypeMagaze: {fileID: 0}
   CurrentCountBullet: 10
 --- !u!54 &4215219157205483475
 Rigidbody:

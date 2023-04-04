@@ -22,6 +22,7 @@ namespace Assets.Script
 
         public void AddInventoryObj(IInventoryObject AddObj)
         {
+            AddObj.isAffiliation = true;
             AllPlayerInventory.Add(AddObj);
             if (AddObj.thisObj.TryGetComponent<BaseWeapon>(out BaseWeapon Weapon))
             {

@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd3315510c390a4eb81a0f5aeb0dbd3, type: 3}
   m_Name: Ak-47 Data
   m_EditorClassIdentifier: 
-  IconImage: {fileID: 21300000, guid: 3dbd6fab9bec4224b8f8b2123540108b, type: 3}
-  _width: 4
-  _height: 2
-  _isRotate: 0
+  _iconImage: {fileID: 21300000, guid: 3dbd6fab9bec4224b8f8b2123540108b, type: 3}

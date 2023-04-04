@@ -1,5 +1,4 @@
 ﻿using Assets.Script.Inventory;
-using Assets.Script.PLayer;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,6 +34,7 @@ namespace Assets.Script.UI
         {
             if (ListObjectContact.IndexOf(ContactObj) != -1)
             {
+                TakeObjectB.onClick.RemoveAllListeners();
                 TakeObjectB.gameObject.SetActive(false);
                 ListObjectContact.Remove(ContactObj);
             }
