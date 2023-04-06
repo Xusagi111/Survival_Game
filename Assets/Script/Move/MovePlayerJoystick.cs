@@ -1,6 +1,5 @@
 ﻿namespace Assets.Script.Player.Move
 {
-    //TODO ZEING
     class MovePlayerJoystick : IGetInputPlayer
     {
         private Joystick _joystick;

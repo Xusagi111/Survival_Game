@@ -32,7 +32,9 @@ namespace Assets.Script.Enemy
         }
 
         public void CheckPlayer()
-        { 
+        {
+            if (_healthUnit.isDead == true) return;
+
             Vector3 relativePos = _playerUnit.ThisTransform.position - transform.position;
             transform.rotation = Quaternion.LookRotation(relativePos * 0.1f, Vector3.up);
             _enemyView.Attack();

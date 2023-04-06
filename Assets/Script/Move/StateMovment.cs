@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Script.Move;
+using System;
 using System.Collections.Generic;
 
 namespace Assets.Script.Player.Move
@@ -13,6 +14,7 @@ namespace Assets.Script.Player.Move
             _statePlayerInput = new Dictionary<Type, IGetInputPlayer>();
             _statePlayerInput.Add(typeof(MovePlayerKeyBoard), new MovePlayerKeyBoard());
             _statePlayerInput.Add(typeof(MovePlayerJoystick), new MovePlayerJoystick(joystick));
+            _statePlayerInput.Add(typeof(PauseMove), new PauseMove());
         }
 
         public void SetMove(IGetInputPlayer House) => CurrentState = House;
@@ -32,6 +34,12 @@ namespace Assets.Script.Player.Move
         public void SetMoveJoustick()
         {
             var State = GetStateMove<MovePlayerJoystick>();
+            SetMove(State);
+        }
+
+        public void SetPauseMove()
+        {
+            var State = GetStateMove<PauseMove>();
             SetMove(State);
         }
     }

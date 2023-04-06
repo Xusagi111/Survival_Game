@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Script.PLayer;
+using UnityEngine;
+using Zenject;
 
 namespace Assets.Script.Player.Move
 {
@@ -8,10 +10,14 @@ namespace Assets.Script.Player.Move
         [SerializeField] private bool _isJoystickMove;
         [SerializeField] private Rigidbody _rigidbody;
 
+        private PlayerView _playerView;
         private StateMovment _stateMovment;
         private Animator _playerAnimator;
 
         private Vector3 _calculateInputPlayer;
+
+        [Inject]
+        private void Construct(PlayerView PlayerView) => _playerView = PlayerView;
 
         public bool IsJoustick
         {
@@ -22,7 +28,6 @@ namespace Assets.Script.Player.Move
             }
         }
 
-
         private void Awake()
         {
             _playerAnimator = GetComponent<Animator>();
@@ -31,10 +36,14 @@ namespace Assets.Script.Player.Move
             CheckToSwitchingState();
         }
 
-        private void Update() => GetInput();
+        private void Update()
+        {
+             GetInput();
+        }
 
         private void FixedUpdate()
         {
+            CheckToStartMethod();
             CalculatePlayerInput();
             Move();
         }
@@ -83,5 +92,9 @@ namespace Assets.Script.Player.Move
             else if (_isJoystickMove == false) _stateMovment.SetMoveKeyBoard();
         }
 
+        private void CheckToStartMethod()
+        {
+            if (_playerView?.Death.isDead == true) _stateMovment.SetPauseMove();
+        }
     }
 }
