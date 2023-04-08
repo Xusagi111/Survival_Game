@@ -8,12 +8,15 @@ namespace Assets.Script.Patrolling
 {
     public class ControllerPatrolling : MonoBehaviour
     {
-        //Data - возможно вынести их в другие классы
         [SerializeField] private Transform[] _pointPatroullings;
         [SerializeField] private Transform _pointToExpectation;
+        [SerializeField] private Animator Test_AnimatorEnemy; 
+        
         private int _currnetPointPatrolling = -1;
-        private float _speedPatrulling = 1f;
+        private float _speedPatrulling = 3f;
         private TweenerCore<Vector3, Vector3, VectorOptions> CurrentActiveTween;
+        private bool _isPause = false;
+
 
         public void Start() => Patrolling();
 
@@ -24,10 +27,11 @@ namespace Assets.Script.Patrolling
             _currnetPointPatrolling = Data.ValuePoint;
         }
 
+        [ContextMenu("Dotween Clear()")]
         public void PausePatrolling()
         {
+            _isPause = true;
             CurrentActiveTween?.Restart();
-           //Останавливать движение врага, и оставлять его на месте
         }
 
         public void StartExpectation()
@@ -52,11 +56,19 @@ namespace Assets.Script.Patrolling
         private void MovePosEnemy(Transform MovePosition)
         {
             //Рассчитать скорость за которую он должен пройти данный участок.
-           CurrentActiveTween = this.transform.DOMove(MovePosition.position, 1f).OnComplete(() =>
+           CurrentActiveTween = this.transform.DOMove(MovePosition.position, _speedPatrulling).OnComplete(() =>
            {
                Debug.Log("Завершение передвижения к точке: " + MovePosition.position);
-               Patrolling();
+               if (_isPause == false)
+               {
+                   Patrolling();
+                   Test_AnimatorEnemy.SetBool("isMove", true);
+               }
+               else Test_AnimatorEnemy.SetBool("isMove", false);
            });
+
+            Vector3 relativePos = MovePosition.position - this.transform.position;
+            this.transform.rotation = Quaternion.LookRotation(relativePos, Vector3.up);
         }
     }
 }

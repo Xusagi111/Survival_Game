@@ -1838,6 +1838,10 @@ PrefabInstance:
       propertyPath: _joystick
       value: 
       objectReference: {fileID: 1903772936}
+    - target: {fileID: 8970554550144016184, guid: 880355d02a16c3f479180b171bb91557, type: 3}
+      propertyPath: SpeedRotate
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 8970554550144016185, guid: 880355d02a16c3f479180b171bb91557, type: 3}
       propertyPath: m_RootOrder
       value: 0
