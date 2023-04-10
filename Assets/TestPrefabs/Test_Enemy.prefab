@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 6445686502824492686}
   - component: {fileID: 6295518876610772764}
   - component: {fileID: 9159180316520577257}
-  - component: {fileID: 1883470472248011429}
+  - component: {fileID: 6608785354848007004}
   m_Layer: 8
   m_Name: Test_Enemy
   m_TagString: Player
@@ -561,7 +561,7 @@ MonoBehaviour:
   _weapon: {fileID: 4479497851529565834}
   _healthUnit: {fileID: 8103534535879891364}
   _animatorUnit: {fileID: 335947058559245857}
---- !u!114 &1883470472248011429
+--- !u!114 &6608785354848007004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -579,7 +579,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _pointToExpectation: {fileID: 0}
-  Test_AnimatorEnemy: {fileID: 335947058559245857}
+  Test_AnimatorEnemy: {fileID: 0}
 --- !u!1 &335947058640397053
 GameObject:
   m_ObjectHideFlags: 0
