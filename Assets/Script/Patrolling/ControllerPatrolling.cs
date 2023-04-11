@@ -1,24 +1,36 @@
-﻿using System;
-using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
+﻿using DG.Tweening;
+using System;
 using UnityEngine;
 
 namespace Assets.Script.Patrolling
 {
     public class ControllerPatrolling : MonoBehaviour
     {
-        [SerializeField] private Transform[] _pointPatroullings;
-        [SerializeField] private Transform _pointToExpectation;
-        [SerializeField] private Animator Test_AnimatorEnemy; 
-        
+        private Transform[] _patroullingsPoint;
+        private Transform _expectationPoint;
+        private Animator _animatorUnit;
+        private IBasePointForUnit _basePointForUnit;
+
         private int _currnetPointPatrolling = -1;
         private float _speedPatrulling = 3f;
-        private TweenerCore<Vector3, Vector3, VectorOptions> CurrentActiveTween;
         private bool _isPause = false;
 
+        public void StartPatrollling(Transform[] patroullingsPoint, Transform expectationPoint, Animator animatorUnit)
+        {
+            _patroullingsPoint = patroullingsPoint;
+            _expectationPoint = expectationPoint;
+            _animatorUnit = animatorUnit;
 
-        public void Start() => Patrolling();
+            if (CheckingRequiredComponents() != true)
+            { 
+                var AllDataPatrooling = _basePointForUnit.GetPatrolling(gameObject.GetComponent<IUnit>());
+                _patroullingsPoint = AllDataPatrooling.AllPatrollingPoint;
+                _expectationPoint = AllDataPatrooling.ExpectationPoint;
+            }
+            Patrolling();
+        }
+
+        public void AddDataPatrolling(IBasePointForUnit basePointForUnit) => _basePointForUnit = basePointForUnit;
 
         public void Patrolling()
         {
@@ -31,44 +43,52 @@ namespace Assets.Script.Patrolling
         public void PausePatrolling()
         {
             _isPause = true;
-            CurrentActiveTween?.Restart();
-        }
-
-        public void StartExpectation()
-        {
-                
+            DOTween.Kill(this.gameObject, true);
         }
 
         private (Transform TransformPoint, int ValuePoint) GetCurrnetPoint()
         {
-            if (_pointPatroullings == null || _pointPatroullings.Length == 0) throw new Exception("ERROR TO ARRAY NULL");
+            if (_patroullingsPoint == null || _patroullingsPoint.Length == 0) throw new Exception("ERROR TO ARRAY NULL");
 
             Transform EndPointPatrolling = null;
             int ValuePoint = 0;
 
-            if (_pointPatroullings.Length <= _currnetPointPatrolling + 1) ValuePoint = 0;
+            if (_patroullingsPoint.Length <= _currnetPointPatrolling + 1) ValuePoint = 0;
             else ValuePoint = _currnetPointPatrolling + 1;
 
-            EndPointPatrolling = _pointPatroullings[ValuePoint];
+            EndPointPatrolling = _patroullingsPoint[ValuePoint];
             return (EndPointPatrolling, ValuePoint);
         }
 
         private void MovePosEnemy(Transform MovePosition)
         {
             //Рассчитать скорость за которую он должен пройти данный участок.
-           CurrentActiveTween = this.transform.DOMove(MovePosition.position, _speedPatrulling).OnComplete(() =>
+           this.transform.DOMove(MovePosition.position, _speedPatrulling).OnComplete(() =>
            {
                Debug.Log("Завершение передвижения к точке: " + MovePosition.position);
                if (_isPause == false)
                {
                    Patrolling();
-                   Test_AnimatorEnemy.SetBool("isMove", true);
+                   _animatorUnit.SetBool("isMove", true);
                }
-               else Test_AnimatorEnemy.SetBool("isMove", false);
+               else _animatorUnit.SetBool("isMove", false);
            });
 
             Vector3 relativePos = MovePosition.position - this.transform.position;
             this.transform.rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+        }
+
+        private bool CheckingRequiredComponents()
+        {
+            bool isAllComponents = false;
+            if (_patroullingsPoint != null && 
+                _expectationPoint != null && 
+                _animatorUnit != null) 
+            {
+                 isAllComponents = true;
+            }
+
+            return isAllComponents;
         }
     }
 }
