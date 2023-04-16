@@ -6,7 +6,7 @@ namespace Assets.Script.Player.Move
     public class MovePlayerKeyBoard : IGetInputPlayer
     {
         public const string HORIZONTAL = "Horizontal";
-        public const string VERTICAL = "Horizontal";
+        public const string VERTICAL = "Vertical";
 
         public (float Horizontal, float Vertical) GetInput()
         {

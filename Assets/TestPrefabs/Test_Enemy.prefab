@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6ecd6e78acb4b45b6e08b79ad31aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyView: {fileID: 9159180316520577257}
+  _enemyView: {fileID: 335947058559245858}
   _healthUnit: {fileID: 8103534535879891364}
   _speedRotate: 20
 --- !u!114 &6295518876610772764
@@ -573,13 +573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef11c791edb5794e847f5ec893d85f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointPatroullings:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _pointToExpectation: {fileID: 0}
-  Test_AnimatorEnemy: {fileID: 0}
 --- !u!1 &335947058640397053
 GameObject:
   m_ObjectHideFlags: 0

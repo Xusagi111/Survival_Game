@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Script.Enemy
 {
-    public class EnemyView : MonoBehaviour
+    public class EnemyView : MonoBehaviour, IEnemyView
     {
         [SerializeField] private BaseWeapon _weapon;
         public BaseWeapon ActiveWeapon { get => _weapon; }
