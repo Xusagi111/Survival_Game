@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Assets.Script.Enemy
 {
@@ -21,6 +22,16 @@ namespace Assets.Script.Enemy
             {
                 AttackUnit();
             }
+        }
+
+        private void MoveEnemy()
+        {
+
+        }
+
+        private IEnumerator MoveEnemyS() 
+        {
+            yield return new WaitForSeconds(1f);
         }
     }
 }

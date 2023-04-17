@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
-using static Codice.CM.Common.CmCallContext;
 
+#if UNITY_EDITOR
 namespace XEntity.InventoryItemSystem
 {
     //This struct contains utility functions for the inventory system, object tweening and object highlighting.
@@ -249,3 +249,4 @@ namespace XEntity.InventoryItemSystem
         }
     }
 }
+#endif
