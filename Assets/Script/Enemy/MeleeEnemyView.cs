@@ -1,4 +1,5 @@
 ﻿using Assets.Script.PLayer;
+using Assets.Script.Unit;
 using System.Collections;
 using UnityEngine;
 using Zenject;
@@ -8,8 +9,10 @@ namespace Assets.Script.Enemy
     public class MeleeEnemyView : MonoBehaviour, IEnemyView
     {
         public const string ENEMY_MELEE_ATTACK_1 = "Attack_1";
+        public const string ENEMY_DEATH = "Die";
 
         [SerializeField] private float DamageEnemy;
+        [SerializeField] private HealthUnit HealthUnit;
         [SerializeField] private IUnit _playerUnit;
         [SerializeField] private Animator animatior;
         private bool _isAttack;
@@ -19,6 +22,17 @@ namespace Assets.Script.Enemy
 
         [Inject]
         private void Construct(PlayerView playerView) => _playerUnit = playerView;
+
+        private void Start()
+        {
+            //Возможно подписка должна осуществляться в контролере.
+            HealthUnit.EventIsDeath += DeadEnemy;
+        }
+
+        private void OnDestroy()
+        {
+            HealthUnit.EventIsDeath -= DeadEnemy;
+        }
 
         public void Attack()
         {
@@ -41,6 +55,14 @@ namespace Assets.Script.Enemy
             _isAttack = true;
             yield return new WaitForSeconds(1f);
             _isAttack = false;
+        }
+
+        private void DeadEnemy(bool isDead)
+        {
+            if (isDead == true)
+            {
+                animatior.SetTrigger(ENEMY_DEATH);
+            }
         }
     }
 }

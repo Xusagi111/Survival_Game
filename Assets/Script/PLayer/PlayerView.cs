@@ -13,6 +13,7 @@ namespace Assets.Script.PLayer
         private PlayerInventory _playerInventory;
         private PlayerTriggerCollision _playerInput;
         private PlayerUI _playerUI;
+        private HelpWithTargetingToShotInEnemy _helpShotComponent;
         private HealthUnit _healthUnit;
         public BaseWeapon ActiveWeapon { get; private set; }
         [field: SerializeField] public Transform ParentToWeapon { get; set; }
@@ -23,19 +24,25 @@ namespace Assets.Script.PLayer
         public Transform ThisTransform { get => this.transform; }
 
         [Inject]
-        private void Constructor(PlayerInventory playerInventory, PlayerTriggerCollision playerInput, HealthUnit healthUnit, PlayerUI playerUI)
+        private void Constructor(PlayerInventory playerInventory, PlayerTriggerCollision playerInput, HealthUnit healthUnit, 
+            PlayerUI playerUI, HelpWithTargetingToShotInEnemy helpShotComponent)
         {
             _playerInventory = playerInventory;
             _playerInput = playerInput;
             _healthUnit = healthUnit;
             _playerUI = playerUI;
+            _helpShotComponent = helpShotComponent;
             AddEvent();
         }
 
         [ContextMenu("Invoke To Scene")]
         public void AttackEvent()
         {
-            if (ActiveWeapon?.isActiveWeapon == true) ActiveWeapon.Attack();
+            if (ActiveWeapon?.isActiveWeapon == true)
+            {
+                ActiveWeapon.Attack();
+                _helpShotComponent.Attack();
+            }
         }
 
         public void AddWeapon(BaseWeapon ActiveWeapon)

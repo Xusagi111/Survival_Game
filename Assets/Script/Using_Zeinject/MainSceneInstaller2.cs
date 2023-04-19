@@ -1,4 +1,5 @@
 ﻿using Assets.Script.Bullet;
+using Assets.Script.Gun;
 using Assets.Script.Inventory;
 using Assets.Script.PLayer;
 using Assets.Script.Pool;
@@ -18,6 +19,7 @@ namespace Assets.Script.Using_Zeinject
         [SerializeField] private BulletPool _bulletPool;
         [SerializeField] private PlayerView _playerView;
         [SerializeField] private PlayerUI _playerUI;
+        [SerializeField] private HelpWithTargetingToShotInEnemy _helpComponent;
 
         public override void InstallBindings()
         {
@@ -29,6 +31,7 @@ namespace Assets.Script.Using_Zeinject
             Container.Bind<IPoolBullet<BaseBullet>>().FromInstance(_bulletPool).AsSingle();
             Container.Bind<PlayerView>().FromInstance(_playerView).AsSingle();
             Container.Bind<PlayerUI>().FromInstance(_playerUI).AsSingle();
+            Container.Bind<HelpWithTargetingToShotInEnemy>().FromInstance(_helpComponent).AsSingle();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Assets.Script.Gun
 
         public void Attack()
         {
-            var a = Physics2D.CircleCastAll(_player.transform.position, _radius, Vector2.zero, _enemyLayer);
+            var a = Physics.SphereCastAll(_player.transform.position, _radius, _player.transform.forward, _radius, _enemyLayer);
             var ListAllDistanseEnemy =  new List<DistanseToEnemy>();
             foreach (var item in a)
             {
