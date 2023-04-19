@@ -13,12 +13,12 @@ namespace XEntity.InventoryItemSystem
             {
                 if (current == null) 
                 {
-                    InteractionSettings settings = Utils.FindInteractionSettings();
-                    if (settings == null)
-                    {
-                        Debug.LogError("No interaction settings were found. Please create one.");
-                    }
-                    else current = settings;
+                    //InteractionSettings settings = Utils.FindInteractionSettings();
+                    //if (settings == null)
+                    //{
+                    //    Debug.LogError("No interaction settings were found. Please create one.");
+                    //}
+                    //else current = settings;
                 }
                 return current;
             }

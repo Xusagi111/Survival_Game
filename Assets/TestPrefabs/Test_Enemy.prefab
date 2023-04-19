@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 6295518876610772764}
   - component: {fileID: 9159180316520577257}
   - component: {fileID: 6608785354848007004}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: Test_Enemy
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -16446,7 +16446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4900342876329447294}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Point_Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19331,9 +19331,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 335947058559245883}
     m_Modifications:
+    - target: {fileID: 1068672235383286745, guid: 745f43effc5d2964a88f49e877435f37, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3644912259006387454, guid: 745f43effc5d2964a88f49e877435f37, type: 3}
       propertyPath: m_Name
       value: Canvas_Hp_Bar_Unit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3644912259006387454, guid: 745f43effc5d2964a88f49e877435f37, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4158280061593322139, guid: 745f43effc5d2964a88f49e877435f37, type: 3}
       propertyPath: m_Pivot.x

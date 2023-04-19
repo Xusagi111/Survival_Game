@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace XEntity.InventoryItemSystem
 {
     //This struct contains utility functions for the inventory system, object tweening and object highlighting.
@@ -222,31 +221,30 @@ namespace XEntity.InventoryItemSystem
         }
 
         //Finds the interaction settings asset in the editor. Returns null if none is found.
-        public static InteractionSettings FindInteractionSettings() 
-        {
-            InteractionSettings settings = null;
+        //public static InteractionSettings FindInteractionSettings() 
+        //{
+        //    InteractionSettings settings = null;
 
-            if (Application.isPlaying == false)
-            {
-                var settingsAssets = AssetDatabase.FindAssets($"t:{nameof(InteractionSettings)}");
-                if (settingsAssets?.Length > 0)
-                {
-                    string assetPath = AssetDatabase.GUIDToAssetPath(settingsAssets[0]);
-                    settings = AssetDatabase.LoadAssetAtPath(assetPath, typeof(InteractionSettings)) as InteractionSettings;
-                }
-            }
-            else 
-            {
-                var settingsAssets = Resources.FindObjectsOfTypeAll(typeof(InteractionSettings));
-                if (settingsAssets == null || settingsAssets.Length <= 0)
-                {
-                    Debug.LogError("No interaction settings were found. Please create one.");
-                }
-                settings = settingsAssets[0] as InteractionSettings;
-            }
+        //    if (Application.isPlaying == false)
+        //    {
+        //        var settingsAssets = AssetDatabase.FindAssets($"t:{nameof(InteractionSettings)}");
+        //        if (settingsAssets?.Length > 0)
+        //        {
+        //            string assetPath = AssetDatabase.GUIDToAssetPath(settingsAssets[0]);
+        //            settings = AssetDatabase.LoadAssetAtPath(assetPath, typeof(InteractionSettings)) as InteractionSettings;
+        //        }
+        //    }
+        //    else 
+        //    {
+        //        var settingsAssets = Resources.FindObjectsOfTypeAll(typeof(InteractionSettings));
+        //        if (settingsAssets == null || settingsAssets.Length <= 0)
+        //        {
+        //            Debug.LogError("No interaction settings were found. Please create one.");
+        //        }
+        //        settings = settingsAssets[0] as InteractionSettings;
+        //    }
 
-            return settings;
-        }
+        //    return settings;
+        //}
     }
 }
-#endif
