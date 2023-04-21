@@ -10,6 +10,7 @@ namespace Assets.Script.Enemy
     {
         public const string ENEMY_MELEE_ATTACK_1 = "Attack_1";
         public const string ENEMY_DEATH = "Die";
+        public const string MOVMENT_ANIMATION = "Walk_Cycle_1";
 
         [SerializeField] private float DamageEnemy;
         [SerializeField] private HealthUnit HealthUnit;
@@ -63,6 +64,11 @@ namespace Assets.Script.Enemy
             {
                 animatior.SetTrigger(ENEMY_DEATH);
             }
+        }
+
+        public void MovmentAnimvation()
+        {
+            animatior.SetTrigger(MOVMENT_ANIMATION);
         }
     }
 }

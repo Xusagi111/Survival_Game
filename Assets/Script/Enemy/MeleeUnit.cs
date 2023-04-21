@@ -14,6 +14,7 @@ namespace Assets.Script.Enemy
         private IEnumerator _attackEnemy;
         private IEnumerator _moveEmeny;
 
+
         public override void AttackUnit()
         {
             if (Death.isDead == true) return;
@@ -46,9 +47,8 @@ namespace Assets.Script.Enemy
         private void MoveEnemy()
         {
             if (_isAttackUnit == true) return;
-            _navMeshAgent.Stop();
-          
-            _navMeshAgent.Move(transform.position + GenerateRandomMove());
+            EnemyView.MovmentAnimvation();
+            _navMeshAgent.SetDestination(transform.position + GenerateRandomMove());
             _moveEmeny = ContinuationMovement();
             StartCoroutine(_moveEmeny);
         }
@@ -63,9 +63,33 @@ namespace Assets.Script.Enemy
 
         private Vector3 GenerateRandomMove()
         {
-            var RandomX = Random.Range(0, 4);
-            var RandomZ = Random.Range(0, 4);
-            return new Vector3(RandomX, transform.position.y, RandomZ);
+            bool isMoveComponent = false;
+            Vector3 MoveVector = Vector3.zero;
+
+            if (PlayerUnit?.ThisTransform?.position != null)
+            {
+                var DistanseEnemyToPlayer = Vector3.Distance(PlayerUnit.ThisTransform.position, this.transform.position);
+                if (DistanseEnemyToPlayer < 100 && DistanseEnemyToPlayer > 4)
+                {
+                    isMoveComponent = true;
+                    MoveVector = PlayerUnit.ThisTransform.position - this.transform.position; 
+                    MoveVector = MoveVector * 0.9f;
+                }
+                else if(DistanseEnemyToPlayer < 4)
+                {
+                    isMoveComponent = true;
+                    MoveVector = transform.position;
+                }
+            }
+
+            if (isMoveComponent == false)
+            {
+                var RandomX = Random.Range(2, 6);
+                 var RandomZ = Random.Range(2, 6);
+                MoveVector =  new Vector3(RandomX, transform.position.y, RandomZ);
+            }
+
+            return MoveVector; 
         }
 
         private IEnumerator AttackCallback()

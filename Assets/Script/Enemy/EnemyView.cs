@@ -30,5 +30,10 @@ namespace Assets.Script.Enemy
         {
             _animatorUnit.SetBool("isDeath", isDead);
         }
+
+        public void MovmentAnimvation()
+        {
+            Debug.Log("Todo MovmentEnemy");
+        }
     }
 }

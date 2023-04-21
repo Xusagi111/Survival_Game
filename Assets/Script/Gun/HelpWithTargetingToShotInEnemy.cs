@@ -36,6 +36,7 @@ namespace Assets.Script.Gun
                         Vector3 relativePos = item.PositionEnemy - transform.position;
                         Quaternion rotation = Quaternion.LookRotation(relativePos);
                         _player.transform.rotation = rotation;
+                        break;
                     }        
                 }
             }
