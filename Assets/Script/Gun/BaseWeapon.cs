@@ -18,6 +18,8 @@ namespace Assets.Script.Gun
 
         public UIDataResource UIDataResource => _uIDataResource;
 
+       [field: SerializeField] public CellInventory CellInventory { get; }
+
         public virtual void Attack() { Debug.Log("Attack()"); }
 
         public void DisableComponent()

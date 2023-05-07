@@ -5,15 +5,17 @@ namespace Assets.Script.Inventory.InventorySystem
 {
     public class ItemCellInventory : MonoBehaviour
     {
-        public IInventoryObject slotItem;
-        public int itemCount;
-        public bool isUseCell;
+        public IInventoryObject SlotItem => _slotItem;
+        public bool IsEmpty { get { return _itemCount <= 0; } }
+        public bool IsElement => _isElement;
 
-        public bool IsEmpty { get { return itemCount <= 0; } }
+        private IInventoryObject _slotItem;
+        private int _itemCount;
 
         [SerializeField] private Image iconImage;
-
         [SerializeField] private Text countText;
+        [SerializeField] private bool _isCountElement = true;
+        private bool _isElement;
 
         private void Awake()
         {
@@ -23,9 +25,16 @@ namespace Assets.Script.Inventory.InventorySystem
 
         public void Add(IInventoryObject item)
         {
-            slotItem = item;
-            itemCount++;
+            _slotItem = item;
+            _itemCount++;
             OnSlotModified();
+        }
+
+        public IInventoryObject Remove()
+        {
+            var CurentElement = _slotItem;
+            OnSlotModified();
+            return CurentElement;
         }
 
         //Removes the passed in amount of items from the slot and drops them at the dropPosition.
@@ -37,21 +46,21 @@ namespace Assets.Script.Inventory.InventorySystem
         //Removes the passed in amount of items from the slot.
         public void Remove(int amount)
         {
-            itemCount -= amount > itemCount ? itemCount : amount;
+            _itemCount -= amount > _itemCount ? _itemCount : amount;
             OnSlotModified();
         }
 
         //Empties the slot completely.
         public void Clear()
         {
-            itemCount = 0;
+            _itemCount = 0;
             OnSlotModified();
         }
 
         //Empties the slot completely and drops all the items at the dropPosition.
         public void ClearAndDrop(Vector3 dropPosition)
         {
-            RemoveAndDrop(itemCount, dropPosition);
+            RemoveAndDrop(_itemCount, dropPosition);
         }
 
         //This method is called any time any of the variables in the slot is modified.
@@ -59,18 +68,21 @@ namespace Assets.Script.Inventory.InventorySystem
         {
             if (!IsEmpty)
             {
-                iconImage.sprite = slotItem.UIDataResource.IconImage;
-                countText.text = itemCount.ToString();
+                iconImage.sprite = _slotItem.UIDataResource.IconImage;
+                countText.text = _itemCount.ToString();
                 iconImage.gameObject.SetActive(true);
             }
             else
             {
-                itemCount = 0;
-                slotItem = null;
+                _itemCount = 0;
+                _slotItem = null;
                 iconImage.sprite = null;
                 countText.text = string.Empty;
                 iconImage.gameObject.SetActive(false);
             }
+
+            //View active to Count Text
+            countText.gameObject.SetActive(_isCountElement);
         }
 
 
@@ -78,8 +90,8 @@ namespace Assets.Script.Inventory.InventorySystem
         //NOTE: This should only be used for loading the container slot data.
         public void SetData(IInventoryObject item, int count)
         {
-            slotItem = item;
-            itemCount = count;
+            _slotItem = item;
+            _itemCount = count;
             OnSlotModified();
         }
     }

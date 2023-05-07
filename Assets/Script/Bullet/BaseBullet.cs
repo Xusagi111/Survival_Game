@@ -18,6 +18,7 @@ namespace Assets.Script.Bullet
         public Type TypeObj { get; protected set; }
         public Rigidbody Rg => _rg;
         public IPoolBullet<BaseBullet> LinkPool => _pool;
+        [field: SerializeField] public CellInventory CellInventory { get; }
 
         public Sprite IconImage { get; set; }
         [SerializeField] private UIDataResource _uIDataResource;

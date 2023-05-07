@@ -10,6 +10,7 @@ namespace Assets.Script.Resource
         protected Type TypeMagazine;
         [SerializeField] private UIDataResource _uIDataResource;
 
+        [field: SerializeField] public CellInventory CellInventory { get; }
         public UIDataResource UIDataResource => _uIDataResource;
         public int CurrentCount { get => _currentCount; }
         public bool isAffiliation { get; set; }

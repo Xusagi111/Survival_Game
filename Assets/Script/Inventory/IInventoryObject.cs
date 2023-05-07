@@ -10,5 +10,7 @@ namespace Assets.Script.Inventory
         public bool isAffiliation { get; set; }
         public GameObject thisObj { get; }
         public Type TypeObj { get; }
+
+        public CellInventory CellInventory { get; }
     }
 }
